@@ -1,0 +1,231 @@
+/* ============================================================================
+   App CHROME — everything that is NOT the document: toolbar, TOC sidebar,
+   the screen reading column, and the paged.js preview backdrop. Hidden in print
+   so Cmd/Ctrl-P produces a clean document. (Document content lives in doc.css.)
+   ============================================================================ */
+
+@import './doc.css';
+
+:root {
+  color-scheme: light;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #f1efe9;
+  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: #1c1b19;
+}
+
+.odc-app {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  grid-template-rows: 52px 1fr;
+  min-height: 100vh;
+}
+
+/* Toolbar ----------------------------------------------------------------- */
+.odc-toolbar {
+  grid-column: 1 / -1;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 52px;
+  padding: 0 16px;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e1ded5;
+}
+.odc-toolbar .brand {
+  font-size: 13.5px;
+  font-weight: 680;
+  letter-spacing: -0.01em;
+}
+.odc-toolbar .brand .dot {
+  color: #b4532a;
+}
+.odc-toolbar .doc-title {
+  font-size: 12.5px;
+  color: #87857c;
+}
+.odc-toolbar .spacer {
+  flex: 1;
+}
+.odc-btn {
+  font: inherit;
+  font-size: 12.5px;
+  border: 1px solid #d7d5cc;
+  background: #fff;
+  border-radius: 7px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+.odc-btn:hover {
+  background: #f6f5f1;
+}
+.odc-btn--primary {
+  background: #1c1b19;
+  color: #fff;
+  border-color: #1c1b19;
+}
+.odc-btn--primary:hover {
+  background: #000;
+}
+.odc-btn--active {
+  background: #f3ece8;
+  border-color: #d8b3a3;
+  color: #b4532a;
+}
+
+/* TOC sidebar ------------------------------------------------------------- */
+.odc-toc {
+  position: sticky;
+  top: 52px;
+  align-self: start;
+  height: calc(100vh - 52px);
+  overflow: auto;
+  padding: 28px 14px;
+  border-right: 1px solid #e1ded5;
+}
+.odc-toc-title {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #a4a196;
+  margin: 0 0 12px 8px;
+}
+.odc-toc a {
+  display: block;
+  text-decoration: none;
+  color: #5c5a52;
+  font-size: 13px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  line-height: 1.3;
+}
+.odc-toc a:hover {
+  background: #eae8e1;
+}
+.odc-toc a.is-active {
+  color: #b4532a;
+  background: #f3ece8;
+  font-weight: 600;
+}
+.odc-toc a[data-level='2'] {
+  padding-left: 20px;
+  font-size: 12.5px;
+}
+.odc-toc a[data-level='3'] {
+  padding-left: 32px;
+  font-size: 12px;
+  color: #8a887f;
+}
+
+/* Reading column ---------------------------------------------------------- */
+.odc-main {
+  padding: 44px 24px 160px;
+}
+.odc-reading {
+  max-inline-size: 856px; /* measure (720) + 2×68 padding */
+  margin-inline: auto;
+  background: #fff;
+  padding: 76px 68px;
+  border-radius: 10px;
+  box-shadow:
+    0 1px 2px rgba(40, 35, 25, 0.06),
+    0 18px 50px rgba(40, 35, 25, 0.07);
+}
+
+/* Forced-break marker — visible on screen only (break-before is inert here) */
+.odc-pagebreak {
+  position: relative;
+  margin: 30px 0;
+  border-top: 1px dashed #cfccc1;
+}
+.odc-pagebreak::after {
+  content: 'page break';
+  position: absolute;
+  right: 0;
+  top: -8px;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #b7b4a8;
+  background: #fff;
+  padding: 0 6px;
+}
+
+/* paged.js preview -------------------------------------------------------- */
+.odc-preview-backdrop {
+  position: fixed;
+  inset: 52px 0 0 0;
+  background: #46443f;
+  overflow: auto;
+  padding: 36px;
+  z-index: 15;
+}
+.odc-preview-status {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  background: #1c1b19;
+  color: #fff;
+  font-size: 12px;
+  padding: 7px 13px;
+  border-radius: 20px;
+  z-index: 16;
+}
+.odc-preview-pages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
+.pagedjs_page {
+  background: #fff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.32);
+}
+
+/* Print ------------------------------------------------------------------- */
+@media print {
+  body {
+    background: #fff;
+  }
+  .odc-app {
+    display: block;
+  }
+  .odc-toolbar,
+  .odc-toc,
+  .odc-preview-backdrop,
+  .odc-preview-status {
+    display: none !important;
+  }
+  .odc-main {
+    padding: 0;
+  }
+  .odc-reading {
+    max-inline-size: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: #fff;
+  }
+  .odc-pagebreak {
+    border: 0;
+    margin: 0;
+  }
+  .odc-pagebreak::after {
+    display: none;
+  }
+}

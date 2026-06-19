@@ -1,0 +1,42 @@
+{
+  "name": "@opendoc/core",
+  "version": "0.0.0",
+  "description": "Opendoc runtime, Vite plugin, and CLI — the agent-native document framework.",
+  "license": "MIT",
+  "author": "Daniel Lee",
+  "homepage": "https://github.com/daniellee-ux/open-doc#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daniellee-ux/open-doc.git",
+    "directory": "packages/core"
+  },
+  "type": "module",
+  "bin": {
+    "opendoc": "./bin/opendoc.mjs"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./vite": "./src/vite/index.ts"
+  },
+  "files": ["src", "bin", "skills"],
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.29.2",
+    "@vitejs/plugin-react": "^4.3.3",
+    "docx": "^9.0.0",
+    "fast-glob": "^3.3.2",
+    "pagedjs": "^0.4.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tsx": "^4.19.2",
+    "vite": "^5.4.10"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.17",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "typescript": "^5.9.3"
+  }
+}

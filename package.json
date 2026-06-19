@@ -1,0 +1,34 @@
+{
+  "name": "opendoc",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Opendoc — the agent-native document framework. The document analog of open-slide.",
+  "license": "MIT",
+  "author": "Daniel Lee",
+  "homepage": "https://github.com/daniellee-ux/open-doc#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daniellee-ux/open-doc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/daniellee-ux/open-doc/issues"
+  },
+  "keywords": [
+    "documents",
+    "react",
+    "pdf",
+    "agent-native",
+    "code-first",
+    "vite",
+    "paged-media"
+  ],
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @opendoc/demo",
+    "build": "npm run build -w @opendoc/demo",
+    "typecheck": "npm run typecheck -w @opendoc/core"
+  }
+}

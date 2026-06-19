@@ -1,0 +1,197 @@
+/* ============================================================================
+   Opendoc DOCUMENT styles — the content itself. Shared verbatim by:
+     1. the live scrolling reading view,
+     2. browser print (Cmd/Ctrl-P → Save as PDF),
+     3. paged.js in-app page preview (imported ?raw and fed to the Previewer).
+   Fragmentation rules (break-*) and @page live here UNCONDITIONALLY so paged.js
+   (which runs in screen context) honors them.
+   ============================================================================ */
+
+.odc-surface {
+  width: 100%;
+  color: var(--odc-color-fg);
+  background: var(--odc-color-bg);
+  font-family: var(--odc-font-body);
+  font-size: var(--odc-body);
+  line-height: var(--odc-leading);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.odc-section-wrap[data-break-before] {
+  break-before: page;
+}
+
+.odc-h1,
+.odc-h2,
+.odc-h3,
+.odc-h4 {
+  font-family: var(--odc-font-head);
+  font-weight: 680;
+  line-height: 1.15;
+  letter-spacing: -0.012em;
+  margin: 1.7em 0 0.5em;
+  break-after: avoid;
+  text-wrap: balance;
+}
+.odc-h1 {
+  font-size: var(--odc-h1);
+  margin-top: 0;
+  letter-spacing: -0.02em;
+}
+.odc-h2 {
+  font-size: var(--odc-h2);
+}
+.odc-h3 {
+  font-size: var(--odc-h3);
+}
+.odc-h4 {
+  font-size: var(--odc-h4);
+}
+
+.odc-lead {
+  font-size: var(--odc-lead);
+  line-height: 1.5;
+  margin: 0 0 1.2em;
+}
+.odc-prose {
+  margin: 0 0 var(--odc-para-gap);
+  orphans: 3;
+  widows: 3;
+}
+.odc-list {
+  margin: 0 0 var(--odc-para-gap);
+  padding-left: 1.4em;
+}
+.odc-list li {
+  margin: 0.3em 0;
+}
+
+.odc-figure {
+  margin: 1.8em 0;
+  break-inside: avoid;
+}
+.odc-figure img,
+.odc-figure svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+}
+.odc-figcaption {
+  font-size: var(--odc-caption);
+  color: var(--odc-color-muted);
+  margin-top: 0.6em;
+  text-align: center;
+}
+
+.odc-callout {
+  break-inside: avoid;
+  border-left: 3px solid var(--odc-color-accent);
+  background: color-mix(in oklab, var(--odc-color-accent) 8%, transparent);
+  padding: 0.9em 1.1em;
+  border-radius: 6px;
+  margin: 1.5em 0;
+}
+.odc-callout-title {
+  font-family: var(--odc-font-head);
+  font-weight: 650;
+  font-size: var(--odc-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--odc-color-accent);
+  margin-bottom: 0.3em;
+}
+
+.odc-table-wrap {
+  break-inside: avoid;
+  margin: 1.6em 0;
+}
+.odc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95em;
+}
+.odc-table th,
+.odc-table td {
+  text-align: left;
+  padding: 0.5em 0.7em;
+  border-bottom: 1px solid var(--odc-color-rule);
+}
+.odc-table thead th {
+  border-bottom: 2px solid var(--odc-color-fg);
+  font-family: var(--odc-font-head);
+  font-size: var(--odc-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.odc-table tr {
+  break-inside: avoid;
+}
+
+.odc-keep-together {
+  break-inside: avoid;
+}
+
+.odc-footref {
+  font-size: 0.7em;
+  vertical-align: super;
+  line-height: 0;
+  color: var(--odc-color-accent);
+  font-weight: 650;
+}
+.odc-footnote {
+  font-size: var(--odc-footnote);
+  color: var(--odc-color-muted);
+  border-top: 1px solid var(--odc-color-rule);
+  padding-top: 0.4em;
+  margin-top: 0.5em;
+  display: flex;
+  gap: 0.5em;
+}
+.odc-footnote-n {
+  color: var(--odc-color-accent);
+  font-weight: 650;
+}
+
+.odc-pagebreak {
+  break-before: page;
+  height: 0;
+}
+
+/* Running title: visually hidden, but its text feeds the @page header via the
+   named string `odctitle` (paged.js, and Chrome print where supported). */
+.odc-running-title {
+  string-set: odctitle content();
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@page {
+  size: Letter;
+  margin: 1in;
+  @top-left {
+    content: string(odctitle);
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 8.5pt;
+    color: #b0ada3;
+    letter-spacing: 0.02em;
+  }
+  @bottom-center {
+    content: counter(page);
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 9pt;
+    color: #999;
+  }
+  @bottom-right {
+    content: 'Opendoc';
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 8pt;
+    letter-spacing: 0.1em;
+    color: #c4c4c4;
+  }
+}

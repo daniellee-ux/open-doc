@@ -1,0 +1,264 @@
+:root {
+  color-scheme: light;
+  --accent: #b4532a;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+body {
+  background: #f1efe9;
+  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: #1c1b19;
+}
+#root {
+  height: 100%;
+}
+
+.odc-app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Toolbar ----------------------------------------------------------------- */
+.odc-toolbar {
+  flex: 0 0 52px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid #e1ded5;
+  z-index: 30;
+}
+.brand {
+  font-size: 13.5px;
+  font-weight: 680;
+}
+.brand .dot {
+  color: var(--accent);
+}
+.doc-title {
+  font-size: 12.5px;
+  color: #87857c;
+}
+.spacer {
+  flex: 1;
+}
+.odc-btn {
+  font: inherit;
+  font-size: 12.5px;
+  border: 1px solid #d7d5cc;
+  background: #fff;
+  border-radius: 7px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.odc-btn--active {
+  background: #f3ece8;
+  border-color: #d8b3a3;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Scroll container + reading column --------------------------------------- */
+.odc-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto; /* THE inner scroll container the overlay must track */
+  padding: 44px 24px 160px;
+}
+.is-inspecting .odc-doc-root {
+  cursor: crosshair;
+}
+.is-inspecting .odc-doc-root * {
+  cursor: crosshair;
+}
+.odc-reading {
+  max-inline-size: 760px;
+  margin-inline: auto;
+  background: #fff;
+  padding: 72px 68px;
+  border-radius: 10px;
+  box-shadow:
+    0 1px 2px rgba(40, 35, 25, 0.06),
+    0 18px 50px rgba(40, 35, 25, 0.07);
+  font-family: 'Iowan Old Style', Palatino, Georgia, serif;
+  line-height: 1.62;
+}
+
+.odc-h1 {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 2.4rem;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.4em;
+}
+.odc-h2 {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.6rem;
+  margin: 1.7em 0 0.5em;
+}
+.odc-lead {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin: 0 0 1.2em;
+}
+.odc-prose {
+  margin: 0 0 1.05em;
+}
+.odc-callout {
+  border-left: 3px solid var(--accent);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+  padding: 0.9em 1.1em;
+  border-radius: 6px;
+  margin: 1.5em 0;
+}
+.odc-callout-title {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-weight: 650;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  margin-bottom: 0.3em;
+}
+.odc-figure {
+  margin: 1.8em 0;
+}
+.odc-figure svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+}
+.odc-figcaption {
+  font-size: 0.85rem;
+  color: #6b6a63;
+  margin-top: 0.6em;
+  text-align: center;
+}
+
+/* Inspector overlay ------------------------------------------------------- */
+.odc-inspector-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none; /* frames don't eat events; the popover re-enables them */
+}
+.odc-frame {
+  position: fixed;
+  border-radius: 4px;
+  pointer-events: none;
+}
+.odc-frame--hover {
+  border: 1.5px dashed rgba(180, 83, 42, 0.55);
+  background: rgba(180, 83, 42, 0.06);
+}
+.odc-frame--select {
+  border: 2px solid var(--accent);
+  background: rgba(180, 83, 42, 0.09);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6);
+}
+.odc-frame-label {
+  position: absolute;
+  top: -19px;
+  left: -2px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  background: var(--accent);
+  color: #fff;
+  padding: 1px 6px;
+  border-radius: 4px 4px 4px 0;
+  white-space: nowrap;
+}
+
+.odc-pop {
+  position: fixed;
+  width: 320px;
+  background: #fff;
+  border: 1px solid #e1ded5;
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+  padding: 12px;
+  pointer-events: auto;
+  z-index: 41;
+}
+.odc-pop-src {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.odc-pop-tag {
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--accent);
+}
+.odc-pop-loc {
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 11px;
+  color: #87857c;
+}
+.odc-pop-loc--miss {
+  color: #c0392b;
+}
+.odc-pop textarea {
+  width: 100%;
+  min-height: 62px;
+  resize: vertical;
+  font: inherit;
+  font-size: 13px;
+  border: 1px solid #d7d5cc;
+  border-radius: 7px;
+  padding: 8px;
+}
+.odc-pop-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+.odc-pop-btn {
+  font: inherit;
+  font-size: 12.5px;
+  border: 1px solid #d7d5cc;
+  background: #fff;
+  border-radius: 7px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.odc-pop-btn--primary {
+  background: #1c1b19;
+  color: #fff;
+  border-color: #1c1b19;
+}
+.odc-pop-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.odc-pop-status {
+  margin-top: 8px;
+  font-size: 11.5px;
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+.odc-pop-status--ok {
+  background: #e8f5e9;
+  color: #1b7a3d;
+}
+.odc-pop-status--err {
+  background: #fdecea;
+  color: #c0392b;
+}
+.odc-pop-status--info {
+  background: #eef0f2;
+  color: #555;
+}
