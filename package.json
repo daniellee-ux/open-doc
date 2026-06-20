@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "description": "Opendoc — the agent-native document framework. The document analog of open-slide.",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "author": "Daniel Lee",
   "homepage": "https://github.com/daniellee-ux/open-doc#readme",
   "repository": {

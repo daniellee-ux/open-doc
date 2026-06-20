@@ -2,7 +2,7 @@
   "name": "@opendoc/core",
   "version": "0.0.0",
   "description": "Opendoc runtime, Vite plugin, and CLI — the agent-native document framework.",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "author": "Daniel Lee",
   "homepage": "https://github.com/daniellee-ux/open-doc#readme",
   "repository": {

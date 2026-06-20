@@ -96,4 +96,4 @@ asset upload / svgl, and image-crop ops.
 
 ## License
 
-[MIT](LICENSE) © Daniel Lee. Inspired by [open-slide](https://github.com/1weiho/open-slide).
+[Apache-2.0](LICENSE) © Daniel Lee. Inspired by [open-slide](https://github.com/1weiho/open-slide).
